@@ -1,0 +1,741 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		071B872717444C220071778E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071B872617444C220071778E /* UIKit.framework */; };
+		071B872917444C220071778E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071B872817444C220071778E /* Foundation.framework */; };
+		071B872B17444C220071778E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071B872A17444C220071778E /* CoreGraphics.framework */; };
+		071B873117444C220071778E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 071B872F17444C220071778E /* InfoPlist.strings */; };
+		071B873317444C220071778E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B873217444C220071778E /* main.m */; };
+		071B873717444C220071778E /* TTTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B873617444C220071778E /* TTTAppDelegate.m */; };
+		071B873917444C220071778E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 071B873817444C220071778E /* Default.png */; };
+		071B873B17444C220071778E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 071B873A17444C220071778E /* Default@2x.png */; };
+		071B873D17444C220071778E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 071B873C17444C220071778E /* Default-568h@2x.png */; };
+		071B874017444C220071778E /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 071B873E17444C220071778E /* MainStoryboard.storyboard */; };
+		071B874317444C220071778E /* TTTGameListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B874217444C220071778E /* TTTGameListTableViewController.m */; };
+		071B874617444C220071778E /* TTTCurrentGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B874517444C220071778E /* TTTCurrentGameViewController.m */; };
+		071B874E17444C220071778E /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071B874D17444C220071778E /* SenTestingKit.framework */; };
+		071B874F17444C220071778E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071B872617444C220071778E /* UIKit.framework */; };
+		071B875017444C220071778E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071B872817444C220071778E /* Foundation.framework */; };
+		071B875817444C220071778E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 071B875617444C220071778E /* InfoPlist.strings */; };
+		071B875B17444C220071778E /* TicTacToeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B875A17444C220071778E /* TicTacToeTests.m */; };
+		071B878317444E030071778E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071B878217444E030071778E /* Security.framework */; };
+		071B878517444E0D0071778E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071B878417444E0D0071778E /* SystemConfiguration.framework */; };
+		071B878B17444EA30071778E /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B878717444EA30071778E /* GTMOAuth2Authentication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B878C17444EA30071778E /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B878817444EA30071778E /* GTMOAuth2SignIn.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B878D17444EA30071778E /* GTMOAuth2ViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B878917444EA30071778E /* GTMOAuth2ViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B878E17444EA30071778E /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 071B878A17444EA30071778E /* GTMOAuth2ViewTouch.xib */; };
+		071B87901744954F0071778E /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B878F1744954F0071778E /* GTMHTTPFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87A71744B1D40071778E /* GTLObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B879E1744B1D40071778E /* GTLObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87A81744B1D40071778E /* GTLQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B879F1744B1D40071778E /* GTLQuery.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87A91744B1D40071778E /* GTLBatchQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87A01744B1D40071778E /* GTLBatchQuery.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87AA1744B1D40071778E /* GTLService.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87A11744B1D40071778E /* GTLService.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87AB1744B1D40071778E /* GTLBatchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87A21744B1D40071778E /* GTLBatchResult.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87AC1744B1D40071778E /* GTLUploadParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87A31744B1D40071778E /* GTLUploadParameters.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87AD1744B1D40071778E /* GTLDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87A41744B1D40071778E /* GTLDateTime.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87AE1744B1D40071778E /* GTLErrorObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87A51744B1D40071778E /* GTLErrorObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87AF1744B1D40071778E /* GTLRuntimeCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87A61744B1D40071778E /* GTLRuntimeCommon.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87B41744B1F30071778E /* GTLFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87B01744B1F30071778E /* GTLFramework.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87B51744B1F30071778E /* GTLJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87B11744B1F30071778E /* GTLJSONParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87B61744B1F30071778E /* GTLUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87B21744B1F30071778E /* GTLUtilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87B71744B1F30071778E /* GTLBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87B31744B1F30071778E /* GTLBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87C01744B2110071778E /* GTMHTTPFetcherService.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87B81744B2110071778E /* GTMHTTPFetcherService.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87C21744B2110071778E /* GTMHTTPFetcherLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87BA1744B2110071778E /* GTMHTTPFetcherLogging.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87C31744B2110071778E /* GTMHTTPFetchHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87BB1744B2110071778E /* GTMHTTPFetchHistory.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87C41744B2110071778E /* GTMHTTPUploadFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87BC1744B2110071778E /* GTMHTTPUploadFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87C51744B2110071778E /* GTMGatherInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87BD1744B2110071778E /* GTMGatherInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87C61744B2110071778E /* GTMMIMEDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87BE1744B2110071778E /* GTMMIMEDocument.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		071B87C71744B2110071778E /* GTMReadMonitorInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 071B87BF1744B2110071778E /* GTMReadMonitorInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0780F7E217542CED00276323 /* GTLQueryTictactoe.m in Sources */ = {isa = PBXBuildFile; fileRef = 0780F7E117542CED00276323 /* GTLQueryTictactoe.m */; };
+		078D97FA17509C9F004ECB72 /* GTLTictactoeGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 078D97F817509C9F004ECB72 /* GTLTictactoeGame.m */; };
+		078D9806175142FB004ECB72 /* GTLTictactoeScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 078D9805175142FB004ECB72 /* GTLTictactoeScore.m */; };
+		078D980F175164C4004ECB72 /* GTLTictactoeGameCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 078D980E175164C4004ECB72 /* GTLTictactoeGameCollection.m */; };
+		078D981817519A34004ECB72 /* GTLServiceTictactoe.m in Sources */ = {isa = PBXBuildFile; fileRef = 078D981717519A34004ECB72 /* GTLServiceTictactoe.m */; };
+		078D981B17519A40004ECB72 /* GTLTictactoeScoreCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 078D981A17519A40004ECB72 /* GTLTictactoeScoreCollection.m */; };
+		078D981E1751A307004ECB72 /* TTTScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078D981D1751A306004ECB72 /* TTTScoreViewController.m */; };
+		07CE9F7A1745A85D00C46B4E /* non_breaking_hyphen_u2011_icon_256x256.png in Resources */ = {isa = PBXBuildFile; fileRef = 07CE9F791745A85D00C46B4E /* non_breaking_hyphen_u2011_icon_256x256.png */; };
+		07CE9F891746004B00C46B4E /* GTLTictactoeUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 07CE9F841746004B00C46B4E /* GTLTictactoeUser.m */; };
+		07CE9F901748A7FF00C46B4E /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07CE9F8F1748A7FF00C46B4E /* x.png */; };
+		07CE9F941748A8AA00C46B4E /* Letter_O.png in Resources */ = {isa = PBXBuildFile; fileRef = 07CE9F931748A8AA00C46B4E /* Letter_O.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		071B875117444C220071778E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 071B871B17444C220071778E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 071B872217444C220071778E;
+			remoteInfo = TicTacToe;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		071B872317444C220071778E /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		071B872617444C220071778E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		071B872817444C220071778E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		071B872A17444C220071778E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		071B872E17444C220071778E /* TicTacToe-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TicTacToe-Info.plist"; sourceTree = "<group>"; };
+		071B873017444C220071778E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		071B873217444C220071778E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		071B873417444C220071778E /* TicTacToe-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TicTacToe-Prefix.pch"; sourceTree = "<group>"; };
+		071B873517444C220071778E /* TTTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTTAppDelegate.h; sourceTree = "<group>"; };
+		071B873617444C220071778E /* TTTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTTAppDelegate.m; sourceTree = "<group>"; };
+		071B873817444C220071778E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		071B873A17444C220071778E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		071B873C17444C220071778E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		071B873F17444C220071778E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		071B874117444C220071778E /* TTTGameListTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTTGameListTableViewController.h; sourceTree = "<group>"; };
+		071B874217444C220071778E /* TTTGameListTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTTGameListTableViewController.m; sourceTree = "<group>"; };
+		071B874417444C220071778E /* TTTCurrentGameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTTCurrentGameViewController.h; sourceTree = "<group>"; };
+		071B874517444C220071778E /* TTTCurrentGameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTTCurrentGameViewController.m; sourceTree = "<group>"; };
+		071B874C17444C220071778E /* TicTacToeTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TicTacToeTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		071B874D17444C220071778E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		071B875517444C220071778E /* TicTacToeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TicTacToeTests-Info.plist"; sourceTree = "<group>"; };
+		071B875717444C220071778E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		071B875917444C220071778E /* TicTacToeTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicTacToeTests.h; sourceTree = "<group>"; };
+		071B875A17444C220071778E /* TicTacToeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicTacToeTests.m; sourceTree = "<group>"; };
+		071B876717444D4B0071778E /* GTLBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLBase64.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTLBase64.h"; sourceTree = "<group>"; };
+		071B876817444D4B0071778E /* GTLBatchQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLBatchQuery.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTLBatchQuery.h"; sourceTree = "<group>"; };
+		071B876917444D4B0071778E /* GTLBatchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLBatchResult.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTLBatchResult.h"; sourceTree = "<group>"; };
+		071B876A17444D4B0071778E /* GTLDateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLDateTime.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTLDateTime.h"; sourceTree = "<group>"; };
+		071B876B17444D4B0071778E /* GTLDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLDefines.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTLDefines.h"; sourceTree = "<group>"; };
+		071B876C17444D4B0071778E /* GTLErrorObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLErrorObject.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTLErrorObject.h"; sourceTree = "<group>"; };
+		071B876D17444D4B0071778E /* GTLFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLFramework.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTLFramework.h"; sourceTree = "<group>"; };
+		071B876E17444D4B0071778E /* GTLJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLJSONParser.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTLJSONParser.h"; sourceTree = "<group>"; };
+		071B876F17444D4B0071778E /* GTLObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLObject.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTLObject.h"; sourceTree = "<group>"; };
+		071B877017444D4B0071778E /* GTLQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLQuery.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTLQuery.h"; sourceTree = "<group>"; };
+		071B877117444D4B0071778E /* GTLRuntimeCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLRuntimeCommon.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTLRuntimeCommon.h"; sourceTree = "<group>"; };
+		071B877217444D4B0071778E /* GTLService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLService.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTLService.h"; sourceTree = "<group>"; };
+		071B877317444D4B0071778E /* GTLTargetNamespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLTargetNamespace.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTLTargetNamespace.h"; sourceTree = "<group>"; };
+		071B877417444D4B0071778E /* GTLUploadParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLUploadParameters.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTLUploadParameters.h"; sourceTree = "<group>"; };
+		071B877517444D4B0071778E /* GTLUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLUtilities.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTLUtilities.h"; sourceTree = "<group>"; };
+		071B877617444D4B0071778E /* GTMGatherInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMGatherInputStream.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTMGatherInputStream.h"; sourceTree = "<group>"; };
+		071B877717444D4B0071778E /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMHTTPFetcher.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTMHTTPFetcher.h"; sourceTree = "<group>"; };
+		071B877817444D4B0071778E /* GTMHTTPFetcherLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMHTTPFetcherLogging.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTMHTTPFetcherLogging.h"; sourceTree = "<group>"; };
+		071B877917444D4B0071778E /* GTMHTTPFetcherService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMHTTPFetcherService.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTMHTTPFetcherService.h"; sourceTree = "<group>"; };
+		071B877A17444D4B0071778E /* GTMHTTPFetchHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMHTTPFetchHistory.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTMHTTPFetchHistory.h"; sourceTree = "<group>"; };
+		071B877B17444D4B0071778E /* GTMHTTPUploadFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMHTTPUploadFetcher.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTMHTTPUploadFetcher.h"; sourceTree = "<group>"; };
+		071B877C17444D4B0071778E /* GTMMIMEDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMMIMEDocument.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTMMIMEDocument.h"; sourceTree = "<group>"; };
+		071B877D17444D4B0071778E /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMOAuth2Authentication.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTMOAuth2Authentication.h"; sourceTree = "<group>"; };
+		071B877E17444D4B0071778E /* GTMOAuth2SignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMOAuth2SignIn.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTMOAuth2SignIn.h"; sourceTree = "<group>"; };
+		071B877F17444D4B0071778E /* GTMOAuth2ViewControllerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMOAuth2ViewControllerTouch.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTMOAuth2ViewControllerTouch.h"; sourceTree = "<group>"; };
+		071B878017444D4B0071778E /* GTMOAuth2WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMOAuth2WindowController.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTMOAuth2WindowController.h"; sourceTree = "<group>"; };
+		071B878117444D4B0071778E /* GTMReadMonitorInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMReadMonitorInputStream.h; path = "../../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos/Headers/GTMReadMonitorInputStream.h"; sourceTree = "<group>"; };
+		071B878217444E030071778E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		071B878417444E0D0071778E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		071B878717444EA30071778E /* GTMOAuth2Authentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMOAuth2Authentication.m; path = "../../google-api-objectivec-client-read-only/Source/OAuth2/GTMOAuth2Authentication.m"; sourceTree = "<group>"; };
+		071B878817444EA30071778E /* GTMOAuth2SignIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMOAuth2SignIn.m; path = "../../google-api-objectivec-client-read-only/Source/OAuth2/GTMOAuth2SignIn.m"; sourceTree = "<group>"; };
+		071B878917444EA30071778E /* GTMOAuth2ViewControllerTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMOAuth2ViewControllerTouch.m; path = "../../google-api-objectivec-client-read-only/Source/OAuth2/Touch/GTMOAuth2ViewControllerTouch.m"; sourceTree = "<group>"; };
+		071B878A17444EA30071778E /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GTMOAuth2ViewTouch.xib; path = "../../google-api-objectivec-client-read-only/Source/OAuth2/Touch/GTMOAuth2ViewTouch.xib"; sourceTree = "<group>"; };
+		071B878F1744954F0071778E /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetcher.m; path = "../../google-api-objectivec-client-read-only/Source/HTTPFetcher/GTMHTTPFetcher.m"; sourceTree = "<group>"; };
+		071B879E1744B1D40071778E /* GTLObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLObject.m; path = "../../google-api-objectivec-client-read-only/Source/Objects/GTLObject.m"; sourceTree = "<group>"; };
+		071B879F1744B1D40071778E /* GTLQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLQuery.m; path = "../../google-api-objectivec-client-read-only/Source/Objects/GTLQuery.m"; sourceTree = "<group>"; };
+		071B87A01744B1D40071778E /* GTLBatchQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLBatchQuery.m; path = "../../google-api-objectivec-client-read-only/Source/Objects/GTLBatchQuery.m"; sourceTree = "<group>"; };
+		071B87A11744B1D40071778E /* GTLService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLService.m; path = "../../google-api-objectivec-client-read-only/Source/Objects/GTLService.m"; sourceTree = "<group>"; };
+		071B87A21744B1D40071778E /* GTLBatchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLBatchResult.m; path = "../../google-api-objectivec-client-read-only/Source/Objects/GTLBatchResult.m"; sourceTree = "<group>"; };
+		071B87A31744B1D40071778E /* GTLUploadParameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLUploadParameters.m; path = "../../google-api-objectivec-client-read-only/Source/Objects/GTLUploadParameters.m"; sourceTree = "<group>"; };
+		071B87A41744B1D40071778E /* GTLDateTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLDateTime.m; path = "../../google-api-objectivec-client-read-only/Source/Objects/GTLDateTime.m"; sourceTree = "<group>"; };
+		071B87A51744B1D40071778E /* GTLErrorObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLErrorObject.m; path = "../../google-api-objectivec-client-read-only/Source/Objects/GTLErrorObject.m"; sourceTree = "<group>"; };
+		071B87A61744B1D40071778E /* GTLRuntimeCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLRuntimeCommon.m; path = "../../google-api-objectivec-client-read-only/Source/Objects/GTLRuntimeCommon.m"; sourceTree = "<group>"; };
+		071B87B01744B1F30071778E /* GTLFramework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLFramework.m; path = "../../google-api-objectivec-client-read-only/Source/Utilities/GTLFramework.m"; sourceTree = "<group>"; };
+		071B87B11744B1F30071778E /* GTLJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLJSONParser.m; path = "../../google-api-objectivec-client-read-only/Source/Utilities/GTLJSONParser.m"; sourceTree = "<group>"; };
+		071B87B21744B1F30071778E /* GTLUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLUtilities.m; path = "../../google-api-objectivec-client-read-only/Source/Utilities/GTLUtilities.m"; sourceTree = "<group>"; };
+		071B87B31744B1F30071778E /* GTLBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLBase64.m; path = "../../google-api-objectivec-client-read-only/Source/Utilities/GTLBase64.m"; sourceTree = "<group>"; };
+		071B87B81744B2110071778E /* GTMHTTPFetcherService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetcherService.m; path = "../../google-api-objectivec-client-read-only/Source/HTTPFetcher/GTMHTTPFetcherService.m"; sourceTree = "<group>"; };
+		071B87BA1744B2110071778E /* GTMHTTPFetcherLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetcherLogging.m; path = "../../google-api-objectivec-client-read-only/Source/HTTPFetcher/GTMHTTPFetcherLogging.m"; sourceTree = "<group>"; };
+		071B87BB1744B2110071778E /* GTMHTTPFetchHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetchHistory.m; path = "../../google-api-objectivec-client-read-only/Source/HTTPFetcher/GTMHTTPFetchHistory.m"; sourceTree = "<group>"; };
+		071B87BC1744B2110071778E /* GTMHTTPUploadFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPUploadFetcher.m; path = "../../google-api-objectivec-client-read-only/Source/HTTPFetcher/GTMHTTPUploadFetcher.m"; sourceTree = "<group>"; };
+		071B87BD1744B2110071778E /* GTMGatherInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMGatherInputStream.m; path = "../../google-api-objectivec-client-read-only/Source/HTTPFetcher/GTMGatherInputStream.m"; sourceTree = "<group>"; };
+		071B87BE1744B2110071778E /* GTMMIMEDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMMIMEDocument.m; path = "../../google-api-objectivec-client-read-only/Source/HTTPFetcher/GTMMIMEDocument.m"; sourceTree = "<group>"; };
+		071B87BF1744B2110071778E /* GTMReadMonitorInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMReadMonitorInputStream.m; path = "../../google-api-objectivec-client-read-only/Source/HTTPFetcher/GTMReadMonitorInputStream.m"; sourceTree = "<group>"; };
+		0780F7E017542CED00276323 /* GTLQueryTictactoe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLQueryTictactoe.h; sourceTree = "<group>"; };
+		0780F7E117542CED00276323 /* GTLQueryTictactoe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLQueryTictactoe.m; sourceTree = "<group>"; };
+		078D97EC17504C7C004ECB72 /* GTLServiceTictactoe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLServiceTictactoe.h; sourceTree = "<group>"; };
+		078D97F717509C9F004ECB72 /* GTLTictactoeGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLTictactoeGame.h; sourceTree = "<group>"; };
+		078D97F817509C9F004ECB72 /* GTLTictactoeGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLTictactoeGame.m; sourceTree = "<group>"; };
+		078D9804175142FB004ECB72 /* GTLTictactoeScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLTictactoeScore.h; sourceTree = "<group>"; };
+		078D9805175142FB004ECB72 /* GTLTictactoeScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLTictactoeScore.m; sourceTree = "<group>"; };
+		078D980D175164C4004ECB72 /* GTLTictactoeGameCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLTictactoeGameCollection.h; sourceTree = "<group>"; };
+		078D980E175164C4004ECB72 /* GTLTictactoeGameCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLTictactoeGameCollection.m; sourceTree = "<group>"; };
+		078D981517519A1C004ECB72 /* GTLTictactoe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLTictactoe.h; sourceTree = "<group>"; };
+		078D981717519A34004ECB72 /* GTLServiceTictactoe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLServiceTictactoe.m; sourceTree = "<group>"; };
+		078D981917519A40004ECB72 /* GTLTictactoeScoreCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLTictactoeScoreCollection.h; sourceTree = "<group>"; };
+		078D981A17519A40004ECB72 /* GTLTictactoeScoreCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLTictactoeScoreCollection.m; sourceTree = "<group>"; };
+		078D981C1751A306004ECB72 /* TTTScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTScoreViewController.h; sourceTree = "<group>"; };
+		078D981D1751A306004ECB72 /* TTTScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTScoreViewController.m; sourceTree = "<group>"; };
+		07CE9F791745A85D00C46B4E /* non_breaking_hyphen_u2011_icon_256x256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = non_breaking_hyphen_u2011_icon_256x256.png; sourceTree = "<group>"; };
+		07CE9F831746004B00C46B4E /* GTLTictactoeUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLTictactoeUser.h; sourceTree = "<group>"; };
+		07CE9F841746004B00C46B4E /* GTLTictactoeUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLTictactoeUser.m; sourceTree = "<group>"; };
+		07CE9F8F1748A7FF00C46B4E /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = x.png; sourceTree = "<group>"; };
+		07CE9F931748A8AA00C46B4E /* Letter_O.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Letter_O.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		071B872017444C220071778E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				071B878517444E0D0071778E /* SystemConfiguration.framework in Frameworks */,
+				071B878317444E030071778E /* Security.framework in Frameworks */,
+				071B872717444C220071778E /* UIKit.framework in Frameworks */,
+				071B872917444C220071778E /* Foundation.framework in Frameworks */,
+				071B872B17444C220071778E /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		071B874817444C220071778E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				071B874E17444C220071778E /* SenTestingKit.framework in Frameworks */,
+				071B874F17444C220071778E /* UIKit.framework in Frameworks */,
+				071B875017444C220071778E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		071B871A17444C220071778E = {
+			isa = PBXGroup;
+			children = (
+				071B872C17444C220071778E /* TicTacToe */,
+				071B875317444C220071778E /* TicTacToeTests */,
+				071B872517444C220071778E /* Frameworks */,
+				071B872417444C220071778E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		071B872417444C220071778E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				071B872317444C220071778E /* TicTacToe.app */,
+				071B874C17444C220071778E /* TicTacToeTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		071B872517444C220071778E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				071B878417444E0D0071778E /* SystemConfiguration.framework */,
+				071B878217444E030071778E /* Security.framework */,
+				071B872617444C220071778E /* UIKit.framework */,
+				071B872817444C220071778E /* Foundation.framework */,
+				071B872A17444C220071778E /* CoreGraphics.framework */,
+				071B874D17444C220071778E /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		071B872C17444C220071778E /* TicTacToe */ = {
+			isa = PBXGroup;
+			children = (
+				071B87911744B0670071778E /* API Handling */,
+				071B873517444C220071778E /* TTTAppDelegate.h */,
+				071B873617444C220071778E /* TTTAppDelegate.m */,
+				071B873E17444C220071778E /* MainStoryboard.storyboard */,
+				071B874117444C220071778E /* TTTGameListTableViewController.h */,
+				071B874217444C220071778E /* TTTGameListTableViewController.m */,
+				071B874417444C220071778E /* TTTCurrentGameViewController.h */,
+				071B874517444C220071778E /* TTTCurrentGameViewController.m */,
+				078D981C1751A306004ECB72 /* TTTScoreViewController.h */,
+				078D981D1751A306004ECB72 /* TTTScoreViewController.m */,
+				071B872D17444C220071778E /* Supporting Files */,
+			);
+			path = TicTacToe;
+			sourceTree = "<group>";
+		};
+		071B872D17444C220071778E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				071B876617444D290071778E /* GTL_Touch Headers */,
+				071B878617444E6D0071778E /* GTL_Touch Source */,
+				071B872E17444C220071778E /* TicTacToe-Info.plist */,
+				071B872F17444C220071778E /* InfoPlist.strings */,
+				071B873217444C220071778E /* main.m */,
+				071B873417444C220071778E /* TicTacToe-Prefix.pch */,
+				07CE9F791745A85D00C46B4E /* non_breaking_hyphen_u2011_icon_256x256.png */,
+				07CE9F8F1748A7FF00C46B4E /* x.png */,
+				07CE9F931748A8AA00C46B4E /* Letter_O.png */,
+				071B873817444C220071778E /* Default.png */,
+				071B873A17444C220071778E /* Default@2x.png */,
+				071B873C17444C220071778E /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		071B875317444C220071778E /* TicTacToeTests */ = {
+			isa = PBXGroup;
+			children = (
+				071B875917444C220071778E /* TicTacToeTests.h */,
+				071B875A17444C220071778E /* TicTacToeTests.m */,
+				071B875417444C220071778E /* Supporting Files */,
+			);
+			path = TicTacToeTests;
+			sourceTree = "<group>";
+		};
+		071B875417444C220071778E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				071B875517444C220071778E /* TicTacToeTests-Info.plist */,
+				071B875617444C220071778E /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		071B876617444D290071778E /* GTL_Touch Headers */ = {
+			isa = PBXGroup;
+			children = (
+				071B876717444D4B0071778E /* GTLBase64.h */,
+				071B876817444D4B0071778E /* GTLBatchQuery.h */,
+				071B876917444D4B0071778E /* GTLBatchResult.h */,
+				071B876A17444D4B0071778E /* GTLDateTime.h */,
+				071B876B17444D4B0071778E /* GTLDefines.h */,
+				071B876C17444D4B0071778E /* GTLErrorObject.h */,
+				071B876D17444D4B0071778E /* GTLFramework.h */,
+				071B876E17444D4B0071778E /* GTLJSONParser.h */,
+				071B876F17444D4B0071778E /* GTLObject.h */,
+				071B877017444D4B0071778E /* GTLQuery.h */,
+				071B877117444D4B0071778E /* GTLRuntimeCommon.h */,
+				071B877217444D4B0071778E /* GTLService.h */,
+				071B877317444D4B0071778E /* GTLTargetNamespace.h */,
+				071B877417444D4B0071778E /* GTLUploadParameters.h */,
+				071B877517444D4B0071778E /* GTLUtilities.h */,
+				071B877617444D4B0071778E /* GTMGatherInputStream.h */,
+				071B877717444D4B0071778E /* GTMHTTPFetcher.h */,
+				071B877817444D4B0071778E /* GTMHTTPFetcherLogging.h */,
+				071B877917444D4B0071778E /* GTMHTTPFetcherService.h */,
+				071B877A17444D4B0071778E /* GTMHTTPFetchHistory.h */,
+				071B877B17444D4B0071778E /* GTMHTTPUploadFetcher.h */,
+				071B877C17444D4B0071778E /* GTMMIMEDocument.h */,
+				071B877D17444D4B0071778E /* GTMOAuth2Authentication.h */,
+				071B877E17444D4B0071778E /* GTMOAuth2SignIn.h */,
+				071B877F17444D4B0071778E /* GTMOAuth2ViewControllerTouch.h */,
+				071B878017444D4B0071778E /* GTMOAuth2WindowController.h */,
+				071B878117444D4B0071778E /* GTMReadMonitorInputStream.h */,
+			);
+			name = "GTL_Touch Headers";
+			sourceTree = "<group>";
+		};
+		071B878617444E6D0071778E /* GTL_Touch Source */ = {
+			isa = PBXGroup;
+			children = (
+				071B87B81744B2110071778E /* GTMHTTPFetcherService.m */,
+				071B87BA1744B2110071778E /* GTMHTTPFetcherLogging.m */,
+				071B87BB1744B2110071778E /* GTMHTTPFetchHistory.m */,
+				071B87BC1744B2110071778E /* GTMHTTPUploadFetcher.m */,
+				071B87BD1744B2110071778E /* GTMGatherInputStream.m */,
+				071B87BE1744B2110071778E /* GTMMIMEDocument.m */,
+				071B87BF1744B2110071778E /* GTMReadMonitorInputStream.m */,
+				071B87B01744B1F30071778E /* GTLFramework.m */,
+				071B87B11744B1F30071778E /* GTLJSONParser.m */,
+				071B87B21744B1F30071778E /* GTLUtilities.m */,
+				071B87B31744B1F30071778E /* GTLBase64.m */,
+				071B879E1744B1D40071778E /* GTLObject.m */,
+				071B879F1744B1D40071778E /* GTLQuery.m */,
+				071B87A01744B1D40071778E /* GTLBatchQuery.m */,
+				071B87A11744B1D40071778E /* GTLService.m */,
+				071B87A21744B1D40071778E /* GTLBatchResult.m */,
+				071B87A31744B1D40071778E /* GTLUploadParameters.m */,
+				071B87A41744B1D40071778E /* GTLDateTime.m */,
+				071B87A51744B1D40071778E /* GTLErrorObject.m */,
+				071B87A61744B1D40071778E /* GTLRuntimeCommon.m */,
+				071B878F1744954F0071778E /* GTMHTTPFetcher.m */,
+				071B878717444EA30071778E /* GTMOAuth2Authentication.m */,
+				071B878817444EA30071778E /* GTMOAuth2SignIn.m */,
+				071B878917444EA30071778E /* GTMOAuth2ViewControllerTouch.m */,
+				071B878A17444EA30071778E /* GTMOAuth2ViewTouch.xib */,
+			);
+			name = "GTL_Touch Source";
+			sourceTree = "<group>";
+		};
+		071B87911744B0670071778E /* API Handling */ = {
+			isa = PBXGroup;
+			children = (
+				078D981517519A1C004ECB72 /* GTLTictactoe.h */,
+				0780F7E017542CED00276323 /* GTLQueryTictactoe.h */,
+				0780F7E117542CED00276323 /* GTLQueryTictactoe.m */,
+				078D97EC17504C7C004ECB72 /* GTLServiceTictactoe.h */,
+				078D981717519A34004ECB72 /* GTLServiceTictactoe.m */,
+				078D97F717509C9F004ECB72 /* GTLTictactoeGame.h */,
+				078D97F817509C9F004ECB72 /* GTLTictactoeGame.m */,
+				078D980D175164C4004ECB72 /* GTLTictactoeGameCollection.h */,
+				078D980E175164C4004ECB72 /* GTLTictactoeGameCollection.m */,
+				078D9804175142FB004ECB72 /* GTLTictactoeScore.h */,
+				078D9805175142FB004ECB72 /* GTLTictactoeScore.m */,
+				078D981917519A40004ECB72 /* GTLTictactoeScoreCollection.h */,
+				078D981A17519A40004ECB72 /* GTLTictactoeScoreCollection.m */,
+				07CE9F831746004B00C46B4E /* GTLTictactoeUser.h */,
+				07CE9F841746004B00C46B4E /* GTLTictactoeUser.m */,
+			);
+			name = "API Handling";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		071B872217444C220071778E /* TicTacToe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 071B875E17444C220071778E /* Build configuration list for PBXNativeTarget "TicTacToe" */;
+			buildPhases = (
+				071B871F17444C220071778E /* Sources */,
+				071B872017444C220071778E /* Frameworks */,
+				071B872117444C220071778E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TicTacToe;
+			productName = TicTacToe;
+			productReference = 071B872317444C220071778E /* TicTacToe.app */;
+			productType = "com.apple.product-type.application";
+		};
+		071B874B17444C220071778E /* TicTacToeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 071B876117444C220071778E /* Build configuration list for PBXNativeTarget "TicTacToeTests" */;
+			buildPhases = (
+				071B874717444C220071778E /* Sources */,
+				071B874817444C220071778E /* Frameworks */,
+				071B874917444C220071778E /* Resources */,
+				071B874A17444C220071778E /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				071B875217444C220071778E /* PBXTargetDependency */,
+			);
+			name = TicTacToeTests;
+			productName = TicTacToeTests;
+			productReference = 071B874C17444C220071778E /* TicTacToeTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		071B871B17444C220071778E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = TTT;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = FooTangClan;
+			};
+			buildConfigurationList = 071B871E17444C220071778E /* Build configuration list for PBXProject "TicTacToe" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 071B871A17444C220071778E;
+			productRefGroup = 071B872417444C220071778E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				071B872217444C220071778E /* TicTacToe */,
+				071B874B17444C220071778E /* TicTacToeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		071B872117444C220071778E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				071B873117444C220071778E /* InfoPlist.strings in Resources */,
+				071B873917444C220071778E /* Default.png in Resources */,
+				071B873B17444C220071778E /* Default@2x.png in Resources */,
+				071B873D17444C220071778E /* Default-568h@2x.png in Resources */,
+				071B874017444C220071778E /* MainStoryboard.storyboard in Resources */,
+				071B878E17444EA30071778E /* GTMOAuth2ViewTouch.xib in Resources */,
+				07CE9F7A1745A85D00C46B4E /* non_breaking_hyphen_u2011_icon_256x256.png in Resources */,
+				07CE9F901748A7FF00C46B4E /* x.png in Resources */,
+				07CE9F941748A8AA00C46B4E /* Letter_O.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		071B874917444C220071778E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				071B875817444C220071778E /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		071B874A17444C220071778E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		071B871F17444C220071778E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				071B873317444C220071778E /* main.m in Sources */,
+				071B873717444C220071778E /* TTTAppDelegate.m in Sources */,
+				071B874317444C220071778E /* TTTGameListTableViewController.m in Sources */,
+				071B874617444C220071778E /* TTTCurrentGameViewController.m in Sources */,
+				071B878B17444EA30071778E /* GTMOAuth2Authentication.m in Sources */,
+				071B878C17444EA30071778E /* GTMOAuth2SignIn.m in Sources */,
+				071B878D17444EA30071778E /* GTMOAuth2ViewControllerTouch.m in Sources */,
+				071B87901744954F0071778E /* GTMHTTPFetcher.m in Sources */,
+				071B87A71744B1D40071778E /* GTLObject.m in Sources */,
+				071B87A81744B1D40071778E /* GTLQuery.m in Sources */,
+				071B87A91744B1D40071778E /* GTLBatchQuery.m in Sources */,
+				071B87AA1744B1D40071778E /* GTLService.m in Sources */,
+				071B87AB1744B1D40071778E /* GTLBatchResult.m in Sources */,
+				071B87AC1744B1D40071778E /* GTLUploadParameters.m in Sources */,
+				071B87AD1744B1D40071778E /* GTLDateTime.m in Sources */,
+				071B87AE1744B1D40071778E /* GTLErrorObject.m in Sources */,
+				071B87AF1744B1D40071778E /* GTLRuntimeCommon.m in Sources */,
+				071B87B41744B1F30071778E /* GTLFramework.m in Sources */,
+				071B87B51744B1F30071778E /* GTLJSONParser.m in Sources */,
+				071B87B61744B1F30071778E /* GTLUtilities.m in Sources */,
+				071B87B71744B1F30071778E /* GTLBase64.m in Sources */,
+				071B87C01744B2110071778E /* GTMHTTPFetcherService.m in Sources */,
+				071B87C21744B2110071778E /* GTMHTTPFetcherLogging.m in Sources */,
+				071B87C31744B2110071778E /* GTMHTTPFetchHistory.m in Sources */,
+				071B87C41744B2110071778E /* GTMHTTPUploadFetcher.m in Sources */,
+				071B87C51744B2110071778E /* GTMGatherInputStream.m in Sources */,
+				071B87C61744B2110071778E /* GTMMIMEDocument.m in Sources */,
+				071B87C71744B2110071778E /* GTMReadMonitorInputStream.m in Sources */,
+				07CE9F891746004B00C46B4E /* GTLTictactoeUser.m in Sources */,
+				078D97FA17509C9F004ECB72 /* GTLTictactoeGame.m in Sources */,
+				078D9806175142FB004ECB72 /* GTLTictactoeScore.m in Sources */,
+				078D980F175164C4004ECB72 /* GTLTictactoeGameCollection.m in Sources */,
+				078D981817519A34004ECB72 /* GTLServiceTictactoe.m in Sources */,
+				078D981B17519A40004ECB72 /* GTLTictactoeScoreCollection.m in Sources */,
+				078D981E1751A307004ECB72 /* TTTScoreViewController.m in Sources */,
+				0780F7E217542CED00276323 /* GTLQueryTictactoe.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		071B874717444C220071778E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				071B875B17444C220071778E /* TicTacToeTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		071B875217444C220071778E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 071B872217444C220071778E /* TicTacToe */;
+			targetProxy = 071B875117444C220071778E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		071B872F17444C220071778E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				071B873017444C220071778E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		071B873E17444C220071778E /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				071B873F17444C220071778E /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		071B875617444C220071778E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				071B875717444C220071778E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		071B875C17444C220071778E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		071B875D17444C220071778E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		071B875F17444C220071778E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TicTacToe/TicTacToe-Prefix.pch";
+				INFOPLIST_FILE = "TicTacToe/TicTacToe-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		071B876017444C220071778E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TicTacToe/TicTacToe-Prefix.pch";
+				INFOPLIST_FILE = "TicTacToe/TicTacToe-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../Library/Developer/Xcode/DerivedData/GTL-gkuyqcqalcyddlgxivhvxxuvdjtb/Build/Products/Debug-iphoneos\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		071B876217444C220071778E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TicTacToe.app/TicTacToe";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TicTacToe/TicTacToe-Prefix.pch";
+				INFOPLIST_FILE = "TicTacToeTests/TicTacToeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		071B876317444C220071778E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TicTacToe.app/TicTacToe";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TicTacToe/TicTacToe-Prefix.pch";
+				INFOPLIST_FILE = "TicTacToeTests/TicTacToeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		071B871E17444C220071778E /* Build configuration list for PBXProject "TicTacToe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				071B875C17444C220071778E /* Debug */,
+				071B875D17444C220071778E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		071B875E17444C220071778E /* Build configuration list for PBXNativeTarget "TicTacToe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				071B875F17444C220071778E /* Debug */,
+				071B876017444C220071778E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		071B876117444C220071778E /* Build configuration list for PBXNativeTarget "TicTacToeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				071B876217444C220071778E /* Debug */,
+				071B876317444C220071778E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 071B871B17444C220071778E /* Project object */;
+}
