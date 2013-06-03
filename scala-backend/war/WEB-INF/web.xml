@@ -1,0 +1,37 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+	
+	<servlet>
+		<servlet-name>com.google.api.server.spi.SystemServiceServlet</servlet-name>
+		<servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
+		<init-param>
+			<param-name>services</param-name>
+			<param-value>sample.tictactoe.multiplayer.controllers.GamePlayController,sample.tictactoe.multiplayer.controllers.MatchmakingController,sample.tictactoe.multiplayer.controllers.ScoreController</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>com.google.api.server.spi.SystemServiceServlet</servlet-name>
+		<url-pattern>/_ah/spi/*</url-pattern>
+		<security-constraint>
+			<web-resource-collection>
+				<url-pattern>/_ah/spi/*</url-pattern>
+			</web-resource-collection>
+			<user-data-constraint>
+				<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+			</user-data-constraint>
+		</security-constraint>
+	</servlet-mapping>
+	
+	<filter>
+		<filter-name>ObjectifyFilter</filter-name>
+		<filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ObjectifyFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<listener>
+		<listener-class>sample.tictactoe.multiplayer.startup.MyListener</listener-class>
+	</listener>
+	
+</web-app>

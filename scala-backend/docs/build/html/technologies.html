@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Technologies &mdash; TicTacToe 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="TicTacToe 1 documentation" href="index.html" />
+    <link rel="next" title="The Servlet Context Listener" href="servletListener.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="servletListener.html" title="The Servlet Context Listener"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="Introduction"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">TicTacToe 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="technologies">
+<h1>Technologies<a class="headerlink" href="#technologies" title="Permalink to this headline">¶</a></h1>
+<p>The complete TicTacToe application incorporates a number of different technologies and services into its implementation. In this section, I will provide a quick overview of each technology, discuss why it was needed for the TicTacToe application and explain any extra configuration that was needed to successfully integrate it within the application.</p>
+<div class="section" id="google-app-engine">
+<h2>Google App Engine<a class="headerlink" href="#google-app-engine" title="Permalink to this headline">¶</a></h2>
+<p>As already stated in the introduction, this documentation assumes prior knowledge on the part of the reader. Specifically, this documentation assumes you are familiar with using Scala, Java and Ant to develop and deploy applications for Google App Engine. If you need a refresher, take a look at <a class="reference external" href="https://scalaongae.readthedocs.org/en/latest/">the documentation</a> and <a class="reference external" href="https://github.com/choruk/scala-gae">code</a> for my previous tutorial on these topics. One point of interest not covered in my documentation is the use of the administration console when developing and testing your application. For every application that you host on Google App Engine, you can access an admin console that will let you monitor all kinds of information about that application, perform various administrative tasks and configure billing options. While developing and testing the API backend and iOS client of the TicTacToe application, I used two sections of the admin console extensively once I realized how to use them: the application logs and the datastore viewer. If you upload your application to App Engine, you can use the application logs to ensure your requests are completing successfully, as well as monitor any log messages you are outputting, and the datastore viewer for an accurate representation of the contents of your application&#8217;s datastore.</p>
+</div>
+<div class="section" id="google-cloud-endpoints">
+<h2>Google Cloud Endpoints<a class="headerlink" href="#google-cloud-endpoints" title="Permalink to this headline">¶</a></h2>
+<p>Google Cloud Endpoints is a relatively new technology introduced by Google for their Google App Engine platform-as-a-service. The endpoints technology allows App Engine developers to generate APIs and client libraries from an annotated App Engine application using the endpoints tool included with the SDK. The annotated App Engine application is referred to as an API backend. The beauty of Google Cloud Endpoints is that these exposed APIs can all be implemented using the various services provided by App Engine itself and the API developers never have to worry about load balancing, scaling and so on. With an App Engine API backend, you can develop a shared web backend that can be used to provide a uniform experience across multiple different client applications. The endpoints tool, located in the App Engine Java SDK bin directory, comes in two flavors: a <em>.sh</em> for Linux and OS X and a <em>.cmd</em> for Windows. For the rest of this documentation, when I refer to the endpoints tool, I am referring to <em>endpoints.sh</em>.</p>
+<div class="section" id="developing-an-api-backend">
+<h3>Developing an API Backend<a class="headerlink" href="#developing-an-api-backend" title="Permalink to this headline">¶</a></h3>
+<p>The development process to create an API backend is fairly straightforward and starts off, as you would expect, with implementing the APIs that you want to expose. While developing your APIs, keep in mind that the parameters your APIs use and the objects they return will be provided and accessed by client applications that are likely written in a completely different language. As such, there are some restrictions on the types allowed. For parameter types, only basic types like string and int are allowed, as well as Plain Old Java Objects (POJOs). This means that you cannot pass a Collection object as a parameter unless you have written a wrapper around it to turn it into a POJO. The restrictions on the return type are almost the opposite, you can only return POJOs, arrays and Collections; nothing with a simple type. This is mostly due to how these objects are serialized when they are transferred in between the API backend and the client application.</p>
+<p>Once you have some APIs that you want to expose, the next step is to properly annotate them. <a class="reference external" href="https://developers.google.com/appengine/docs/java/endpoints/annotations">Google&#8217;s documentation</a> introduces the necessary annotations and provides a detailed description of how to properly annotate your APIs, although there are a few caveats that are not easily discernable from their docs. One such caveat is related to the <em>&#64;ApiMethod</em> annotation options, specifically the path option. The path configuration is optional and if left blank, the endpoints tool will just pick a default path based on the name of the API. However, if you have multiple APIs with the same underlying HTTP method (for example a GET request that returns one entity and a GET request that returns a list of entities) and you leave out the path option, you will likely run into an error when invoking the endpoints tool. To simulate this error within the Scala backend, delete the path option from the list method of the GamePlay controller, compile the code and invoke the endpoints tool on the GamePlay controller. Another fact that is not entirely clear from the documentation regards the <em>&#64;Named</em> annotation. Essentially, a parameter that is &#8220;named&#8221; is one that appears in the URL in a form like <em>http://www.endpointapp.com/find?parameter1=blah&amp;parameter2=blah</em>. A parameter that isn&#8217;t named is simply included with the POST request data.</p>
+<p>The annotations are necessary for the endpoints tool to be able to automatically generate the API discovery and configuration files needed to host your API backend on App Engine. After annotating your API backend, you need to use the endpoints tool to generate these API files. You invoke the endpoints tool like so:</p>
+<div class="highlight-sh"><div class="highlight"><pre>/path_to_gae_sdk/bin/endpoints.sh get-client-lib &lt;class_names&gt;
+</pre></div>
+</div>
+<p>For the &lt;class_names&gt;, you need to pass in the full class name of each class that implements any of the APIs you want to expose. If you have multiple classes, you must separate each class with a space. The endpoints tool also automatically generates a Java client library that is ready to be used with Android and Java web apps. To generate a client library for an iOS application, another step is required that uses one of the API discovery files, which is discussed in the next section on <a class="reference internal" href="#objective-c-and-ios">Objective-C and iOS</a>.</p>
+<p>However, if you try to use the endpoints tool on Scala code, you will get all kinds of Java exceptions about missing classes. These exceptions are due to the fact that the CLASSPATH of the endpoints tool has none of the Scala JARs and thus none of the Scala specific classes are recognized at compile time. Luckily, there is a simple fix to this issue: you simply need to modify the <em>endpoints.sh</em> script to include the Scala JARs on the CLASSPATH. This modification can be achieved by adding the following lines to the end of the <em>endpoints.sh</em> script, replacing <em>path_to_scala</em> with the full path to the Scala directory on your machine:</p>
+<div class="highlight-sh"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="nv">SCALA_LIB</span><span class="o">=</span><span class="s2">&quot;/path_to_scala/libexec&quot;</span>
+    <span class="k">for </span>jar in <span class="s2">&quot;$SCALA_LIB&quot;</span>/lib/*.jar; <span class="k">do</span>
+<span class="k">            </span><span class="nv">CLASSPATH</span><span class="o">=</span><span class="s2">&quot;$CLASSPATH:$jar&quot;</span>
+    <span class="k">done</span>
+</pre></div>
+</td></tr></table></div>
+<p>Once you have generated all of the API files, move all files other than the <em>.zip</em> into your <em>war/WEB-INF</em> directory. You can now test your API backend locally <a class="reference external" href="https://developers.google.com/appengine/docs/java/endpoints/test_deploy">using curl</a>. Another way to test your API that isn&#8217;t explicitly noted in the Java documentation is by using the APIs Explorer tool. The really nice part about this tool is that it runs right in your browser and essentially provides you with an interface to call your various APIs. You can access this tool on API backends running locally, as well as those that are live, simply by adding the following path to the end of your application&#8217;s URL: <em>/_ah/api/explorer</em>. For example, if you are running your API backend locally on port 8888, you would enter the following URL into your browser: <em>http://localhost:8888/_ah/api/explorer</em>. You can create and pass in the parameters your APIs require and even authorize requests through OAuth 2.0 using this wonderful tool.</p>
+</div>
+<div class="section" id="generating-client-ids">
+<h3>Generating Client IDs<a class="headerlink" href="#generating-client-ids" title="Permalink to this headline">¶</a></h3>
+<p>In order for other applications to be able to access your APIs, they need a client ID. You must create and include this ID within both the client application and the API backend. There are two different types of client IDs: simple and authorized. As the names suggest, a simple client ID provides unauthenticated access, while an authorized client ID provides authenticated access. You should use simple client IDs when you don&#8217;t need to access user data and authorized client IDs whenever you need to access private user data. To create client IDs, you need to have a project in the <a class="reference external" href="https://code.google.com/apis/console">Google APIs console</a>. If you don&#8217;t have one, it is very simple and straightforward to create a new one. Once you open this project, click on the &#8220;API Access&#8221; tab to create and manage client IDs.</p>
+</div>
+</div>
+<div class="section" id="objective-c-and-ios">
+<span id="id1"></span><h2>Objective-C and iOS<a class="headerlink" href="#objective-c-and-ios" title="Permalink to this headline">¶</a></h2>
+<p>This documentation assumes that you are already familiar with using Objective-C to write iOS applications. Apple has <a class="reference external" href="https://www.developer.apple.com">wonderful documentation</a> to help familiarize you with Objective-C and iOS and there is a huge developer community online as well. The TicTacToe client is an iOS application that accesses the APIs provided by the Scala App Engine endpoint using the client library generated by the endpoint tool. This client library relies heavily on the <a class="reference external" href="http://code.google.com/p/google-api-objectivec-client/">Google APIs Client Library for Objective-C</a>. The Objective-C client library can be used for more than just accessing APIs exposed by a cloud endpoint, such as integrating an iOS application with Google Drive and Google Calendar. However, this documentation is only concerned with accessing cloud endpoints APIs from the iOS client.</p>
+<div class="section" id="linking-to-the-google-apis-client-library-for-objective-c">
+<h3>Linking to the Google APIs Client Library for Objective-C<a class="headerlink" href="#linking-to-the-google-apis-client-library-for-objective-c" title="Permalink to this headline">¶</a></h3>
+<p>For the purpose of the TicTacToe iOS client, the Objective-C client library was solely used because of the dependency from the auto-generated iOS client library discussed in the next section. While there are <a class="reference external" href="http://code.google.com/p/google-api-objectivec-client/wiki/BuildingTheLibrary">a few different ways</a> to use the library within an iOS application, by far the easiest approach is to simply compile the source files directly into your application. To check out a copy of the Objective-C client library, type the following command at the command line:</p>
+<div class="highlight-sh"><div class="highlight"><pre>svn checkout http://google-api-objectivec-client.googlecode.com/svn/trunk/ google-api-objectivec-client-read-only
+</pre></div>
+</div>
+<p>Once you have run this command, you should have a directory with a name like <em>google-api-objectivec-client-read-only</em>, inside of which is two more directories; one with examples showing the different services being used and the other with the source code. All you have to do is drag all of the header and implementation source files that your application will need to make use of into the navigator pane of your iOS application in Xcode. If you take a look at the TicTacToe iOS client, you will see two folders within the &#8220;Supporting Files&#8221; folder, one for the headers that the application needs and one for the source. However, if your iOS application uses ARC (<em>it should!</em>), you need to modify the command line arguments used when the Google client library files are compiled because the client library does not use ARC. To do so, select the target you added the library files to and go to the &#8220;Build Phases&#8221; tab. From this tab, expand the &#8220;Compile Sources&#8221; section, select all of the library files and press enter. In the text area that pops up, type &#8220;-fno-objc-arc&#8221; and press enter once more. Now when you build your application, you should not receive any errors regarding these files. After you have successfully added the library to your application, all you need to do is <em>#include</em> the headers in your application code where the classes are used.</p>
+</div>
+<div class="section" id="generating-the-ios-client-library">
+<h3>Generating the iOS Client Library<a class="headerlink" href="#generating-the-ios-client-library" title="Permalink to this headline">¶</a></h3>
+<p>As eluded to earlier, generating the iOS client library from your annotated API backend requires a bit more work than with the Java client library. You still must invoke the endpoints tool on your annotated APIs, but you also need to make use of a Service Generator tool that comes with the Google APIs Objective-C client library. The Service Generator Xcode project is located within the <em>Source/Tools/ServiceGenerator</em> directory and you need to use this Xcode project to build the tool itself. Once you open the <em>ServiceGenerator.xcodeproj</em> file, just build the project (hotkey <em>command+b</em>) and the Service Generator tool will be built and placed in the &#8220;Products&#8221; folder in the navigator pane of the Xcode project. Click on the <em>ServiceGenerator</em> executable in Xcode and, from the utilities view, use the file inspector to locate its full path (likely in the derived data for the project). You then use the tool like so, passing in the <em>xx-xx-rpc.discovery</em> file autogenerated by the endpoints tool:</p>
+<div class="highlight-sh"><div class="highlight"><pre>/full/path/to/ServiceGenerator apiName-version-rpc.discovery --outputDir API
+</pre></div>
+</div>
+<p>This command will generate the necessary Objective-C classes that provide basic consumption of the APIs you exposed. If you wish to add custom methods of your own to these classes, you shouldn&#8217;t write this code directly into the auto-generated files. Instead, you should subclass the auto-generated classes and add the new functionality in the subclass. The main reason behind this idea is that every time you change your API backend and recreate your client libraries, the new auto-generated files won&#8217;t have the custom code you added, should any of those files change.</p>
+<blockquote>
+<div><strong>Note:</strong> You need to explicitly create getter and setter methods for all of the instance variables that you want to be created as properties within the auto-generated code.</div></blockquote>
+</div>
+</div>
+<div class="section" id="objectify">
+<h2>Objectify<a class="headerlink" href="#objectify" title="Permalink to this headline">¶</a></h2>
+<p>Last, but certainly not least, is the Objectify framework. This framework is specifically designed to be used as a wrapper around the Java implementation of the Google App Engine datastore. With Objectify, you can easily configure your entities using annotations and interact with the App Engine datastore using a clean, simple API. You also have access to an Objectify session cache on top of the App Engine memcache and schema changes are made much easier using some tricks with Objectify annotations. All of this and more is explained in the <a class="reference external" href="http://code.google.com/p/objectify-appengine/wiki/Introduction">documentation for Objectify</a> for those who are unfamiliar. The TicTacToe application uses Objectify 4.0b3, which can be found <a class="reference external" href="http://repo1.maven.org/maven2/com/googlecode/objectify/objectify/4.0b3/">here</a>. You will also need to download the <a class="reference external" href="http://code.google.com/p/guava-libraries/">Google Guava JAR</a>, as this is a dependency of this version of Objectify.</p>
+<div class="section" id="using-objectify-with-scala">
+<h3>Using Objectify with Scala<a class="headerlink" href="#using-objectify-with-scala" title="Permalink to this headline">¶</a></h3>
+<p>One of the greatest features of Objectify 4 is its ability to work well with Scala. In fact, their integration &#8220;just works&#8221; excluding a few minor points of interest:</p>
+<ul class="simple">
+<li>To autopopulate the id field of a Long id, you need to directly use the java.lang.Long type because Scala&#8217;s Long doesn&#8217;t allow initalizing to a <em>null</em> value.</li>
+<li>The <em>type</em> keyword is a reserved word in Scala. To use the <em>type()</em> method of the Objectify service, you need to surround it with backticks: <em>`type`()</em>.</li>
+<li>The <em>type()</em> method expects a class type as input, which is retrieved using the <em>classOf[]</em> operator in Scala.</li>
+</ul>
+</div>
+<div class="section" id="using-objectify-with-google-cloud-endpoints">
+<h3>Using Objectify with Google Cloud Endpoints<a class="headerlink" href="#using-objectify-with-google-cloud-endpoints" title="Permalink to this headline">¶</a></h3>
+<p>A really nice feature of Objectify is the ability to define complex relationships between entities using the Key&lt;?&gt; class and the Ref&lt;?&gt; class. Unfortunately, the endpoints tool will throw an exception if any of the classes used as a parameter or return type in an API contain a Key&lt;?&gt; or Ref&lt;?&gt; member variable. The endpoints tool fails because it cannot properly serialize an instance of either of these two classes when the data is passing between API backend and client. Although this limitation didn&#8217;t cause any problems with the TicTacToe application, it is nonetheless a significant limitation. A suggested workaround for this issue would be to separate your entity classes into an internal representation that gets saved into the datastore and an external representation that is only used to pass data between the API backend and the client. The external representation would only need to contain the ID of the internal representation, so that you could retrieve the internal representation in the API backend when a request comes in.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Technologies</a><ul>
+<li><a class="reference internal" href="#google-app-engine">Google App Engine</a></li>
+<li><a class="reference internal" href="#google-cloud-endpoints">Google Cloud Endpoints</a><ul>
+<li><a class="reference internal" href="#developing-an-api-backend">Developing an API Backend</a></li>
+<li><a class="reference internal" href="#generating-client-ids">Generating Client IDs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#objective-c-and-ios">Objective-C and iOS</a><ul>
+<li><a class="reference internal" href="#linking-to-the-google-apis-client-library-for-objective-c">Linking to the Google APIs Client Library for Objective-C</a></li>
+<li><a class="reference internal" href="#generating-the-ios-client-library">Generating the iOS Client Library</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#objectify">Objectify</a><ul>
+<li><a class="reference internal" href="#using-objectify-with-scala">Using Objectify with Scala</a></li>
+<li><a class="reference internal" href="#using-objectify-with-google-cloud-endpoints">Using Objectify with Google Cloud Endpoints</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="introduction.html"
+                        title="previous chapter">Introduction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="servletListener.html"
+                        title="next chapter">The Servlet Context Listener</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/technologies.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="servletListener.html" title="The Servlet Context Listener"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="Introduction"
+             >previous</a> |</li>
+        <li><a href="index.html">TicTacToe 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Chris Horuk.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,234 @@
+{
+ "kind": "discovery#rpcDescription",
+ "etag": "\"381e4s_8vUCNPclzPT4yxtto0eA/Vh_1M3Rsrpt913KNtbwInV4hLhk\"",
+ "discoveryVersion": "v1",
+ "id": "tictactoe:v1",
+ "name": "tictactoe",
+ "version": "v1",
+ "description": "This is an API",
+ "ownerDomain": "google.com",
+ "ownerName": "Google",
+ "icons": {
+  "x16": "http://www.google.com/images/icons/product/search-16.gif",
+  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+ },
+ "protocol": "rpc",
+ "rootUrl": "https://tictactoe-api.appspot.com/_ah/api/",
+ "rpcUrl": "https://tictactoe-api.appspot.com/_ah/api/rpc",
+ "rpcPath": "/_ah/api/rpc",
+ "parameters": {
+  "alt": {
+   "type": "string",
+   "description": "Data format for the response.",
+   "default": "json",
+   "enum": [
+    "json"
+   ],
+   "enumDescriptions": [
+    "Responses with Content-Type of application/json"
+   ],
+   "location": "query"
+  },
+  "fields": {
+   "type": "string",
+   "description": "Selector specifying which fields to include in a partial response.",
+   "location": "query"
+  },
+  "key": {
+   "type": "string",
+   "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+   "location": "query"
+  },
+  "oauth_token": {
+   "type": "string",
+   "description": "OAuth 2.0 token for the current user.",
+   "location": "query"
+  },
+  "prettyPrint": {
+   "type": "boolean",
+   "description": "Returns response with indentations and line breaks.",
+   "default": "true",
+   "location": "query"
+  },
+  "quotaUser": {
+   "type": "string",
+   "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+   "location": "query"
+  },
+  "userIp": {
+   "type": "string",
+   "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+   "location": "query"
+  }
+ },
+ "schemas": {
+  "Game": {
+   "id": "Game",
+   "type": "object",
+   "properties": {
+    "board": {
+     "type": "string"
+    },
+    "date": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "playerTurn": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "user1": {
+     "$ref": "User"
+    },
+    "user2": {
+     "$ref": "User"
+    }
+   }
+  },
+  "GameCollection": {
+   "id": "GameCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "Game"
+     }
+    }
+   }
+  },
+  "Score": {
+   "id": "Score",
+   "type": "object",
+   "properties": {
+    "board": {
+     "type": "string"
+    },
+    "date": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "outcome": {
+     "type": "string"
+    },
+    "playerTurn": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "user1": {
+     "$ref": "User"
+    },
+    "user2": {
+     "$ref": "User"
+    }
+   }
+  },
+  "ScoreCollection": {
+   "id": "ScoreCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "Score"
+     }
+    }
+   }
+  },
+  "User": {
+   "id": "User",
+   "type": "object",
+   "properties": {
+    "authDomain": {
+     "type": "string"
+    },
+    "email": {
+     "type": "string"
+    },
+    "federatedIdentity": {
+     "type": "string"
+    },
+    "nickname": {
+     "type": "string"
+    },
+    "userId": {
+     "type": "string"
+    }
+   }
+  }
+ },
+ "methods": {
+  "tictactoe.gamePlay.getCurrentGameBoard": {
+   "id": "tictactoe.gamePlay.getCurrentGameBoard",
+   "allowGet": true,
+   "parameters": {
+    "resource": {
+     "$ref": "Game"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "Game"
+   }
+  },
+  "tictactoe.gamePlay.markGameAsFinished": {
+   "id": "tictactoe.gamePlay.markGameAsFinished",
+   "parameters": {
+    "resource": {
+     "$ref": "Game"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "Score"
+   }
+  },
+  "tictactoe.gamePlay.updateGameWithNewBoard": {
+   "id": "tictactoe.gamePlay.updateGameWithNewBoard",
+   "parameters": {
+    "resource": {
+     "$ref": "Game"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "Game"
+   }
+  },
+  "tictactoe.games.list": {
+   "id": "tictactoe.games.list",
+   "allowGet": true,
+   "returns": {
+    "$ref": "GameCollection"
+   }
+  },
+  "tictactoe.matchmaking.findOrCreateGame": {
+   "id": "tictactoe.matchmaking.findOrCreateGame",
+   "allowGet": true,
+   "returns": {
+    "$ref": "Game"
+   }
+  },
+  "tictactoe.scores.list": {
+   "id": "tictactoe.scores.list",
+   "allowGet": true,
+   "returns": {
+    "$ref": "ScoreCollection"
+   }
+  }
+ }
+}

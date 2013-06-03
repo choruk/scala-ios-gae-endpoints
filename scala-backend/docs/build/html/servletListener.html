@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Servlet Context Listener &mdash; TicTacToe 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="TicTacToe 1 documentation" href="index.html" />
+    <link rel="next" title="The Scala Backend" href="scalaBackend.html" />
+    <link rel="prev" title="Technologies" href="technologies.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="scalaBackend.html" title="The Scala Backend"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="technologies.html" title="Technologies"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">TicTacToe 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-servlet-context-listener">
+<h1>The Servlet Context Listener<a class="headerlink" href="#the-servlet-context-listener" title="Permalink to this headline">¶</a></h1>
+<p>A common need of many applications is the ability to execute some operations when the application is initialized. With Google App Engine, this need is satisfied through three different approaches: a &lt;load-on-startup&gt; servlet, a ServletContextListener, or a custom warmup servlet. Google&#8217;s documentation on <a class="reference external" href="https://developers.google.com/appengine/docs/java/config/appconfig#Warmup_Requests">warmup requests</a> already covers the basics of these three approaches.</p>
+<p>TicTacToe needs to use a servlet context listener for two reasons: to register the datastore entities with Objectify and to initialize the application&#8217;s global logger. The first reason is simply a requirement by Objectify and because it should only run once before all other servlet code, it fits nicely into the servlet context listener. The second reason is to ensure that the application&#8217;s logs correctly reflect all of the messages logged within the application&#8217;s code.</p>
+<p>One important fact to remember about a ServletContextListener is that it might be invoked as part of the first user request to your application if no warmup request was initiated, which will result in loading requests. If you have some complex logic being handled within a ServletContextListener, your application will incur additional load time, which might not make your users too happy.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="technologies.html"
+                        title="previous chapter">Technologies</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scalaBackend.html"
+                        title="next chapter">The Scala Backend</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/servletListener.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="scalaBackend.html" title="The Scala Backend"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="technologies.html" title="Technologies"
+             >previous</a> |</li>
+        <li><a href="index.html">TicTacToe 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Chris Horuk.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

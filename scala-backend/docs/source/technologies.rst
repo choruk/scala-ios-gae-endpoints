@@ -1,0 +1,116 @@
+=============
+Technologies
+=============
+
+The complete TicTacToe application incorporates a number of different technologies and services into its implementation. In this section, I will provide a quick overview of each technology, discuss why it was needed for the TicTacToe application and explain any extra configuration that was needed to successfully integrate it within the application.
+
+Google App Engine
+-----------------
+
+As already stated in the introduction, this documentation assumes prior knowledge on the part of the reader. Specifically, this documentation assumes you are familiar with using Scala, Java and Ant to develop and deploy applications for Google App Engine. If you need a refresher, take a look at `the documentation`_ and `code`_ for my previous tutorial on these topics. One point of interest not covered in my documentation is the use of the administration console when developing and testing your application. For every application that you host on Google App Engine, you can access an admin console that will let you monitor all kinds of information about that application, perform various administrative tasks and configure billing options. While developing and testing the API backend and iOS client of the TicTacToe application, I used two sections of the admin console extensively once I realized how to use them: the application logs and the datastore viewer. If you upload your application to App Engine, you can use the application logs to ensure your requests are completing successfully, as well as monitor any log messages you are outputting, and the datastore viewer for an accurate representation of the contents of your application's datastore.
+
+.. _the documentation: https://scalaongae.readthedocs.org/en/latest/
+.. _code: https://github.com/choruk/scala-gae
+
+Google Cloud Endpoints
+----------------------
+
+Google Cloud Endpoints is a relatively new technology introduced by Google for their Google App Engine platform-as-a-service. The endpoints technology allows App Engine developers to generate APIs and client libraries from an annotated App Engine application using the endpoints tool included with the SDK. The annotated App Engine application is referred to as an API backend. The beauty of Google Cloud Endpoints is that these exposed APIs can all be implemented using the various services provided by App Engine itself and the API developers never have to worry about load balancing, scaling and so on. With an App Engine API backend, you can develop a shared web backend that can be used to provide a uniform experience across multiple different client applications. The endpoints tool, located in the App Engine Java SDK bin directory, comes in two flavors: a *.sh* for Linux and OS X and a *.cmd* for Windows. For the rest of this documentation, when I refer to the endpoints tool, I am referring to *endpoints.sh*. 
+
+Developing an API Backend
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The development process to create an API backend is fairly straightforward and starts off, as you would expect, with implementing the APIs that you want to expose. While developing your APIs, keep in mind that the parameters your APIs use and the objects they return will be provided and accessed by client applications that are likely written in a completely different language. As such, there are some restrictions on the types allowed. For parameter types, only basic types like string and int are allowed, as well as Plain Old Java Objects (POJOs). This means that you cannot pass a Collection object as a parameter unless you have written a wrapper around it to turn it into a POJO. The restrictions on the return type are almost the opposite, you can only return POJOs, arrays and Collections; nothing with a simple type. This is mostly due to how these objects are serialized when they are transferred in between the API backend and the client application.
+
+Once you have some APIs that you want to expose, the next step is to properly annotate them. `Google's documentation`_ introduces the necessary annotations and provides a detailed description of how to properly annotate your APIs, although there are a few caveats that are not easily discernable from their docs. One such caveat is related to the *@ApiMethod* annotation options, specifically the path option. The path configuration is optional and if left blank, the endpoints tool will just pick a default path based on the name of the API. However, if you have multiple APIs with the same underlying HTTP method (for example a GET request that returns one entity and a GET request that returns a list of entities) and you leave out the path option, you will likely run into an error when invoking the endpoints tool. To simulate this error within the Scala backend, delete the path option from the list method of the GamePlay controller, compile the code and invoke the endpoints tool on the GamePlay controller. Another fact that is not entirely clear from the documentation regards the *@Named* annotation. Essentially, a parameter that is "named" is one that appears in the URL in a form like *http://www.endpointapp.com/find?parameter1=blah&parameter2=blah*. A parameter that isn't named is simply included with the POST request data.
+
+.. _Google's documentation: https://developers.google.com/appengine/docs/java/endpoints/annotations
+
+The annotations are necessary for the endpoints tool to be able to automatically generate the API discovery and configuration files needed to host your API backend on App Engine. After annotating your API backend, you need to use the endpoints tool to generate these API files. You invoke the endpoints tool like so: 
+
+.. code-block:: sh
+
+	/path_to_gae_sdk/bin/endpoints.sh get-client-lib <class_names>
+
+For the <class_names>, you need to pass in the full class name of each class that implements any of the APIs you want to expose. If you have multiple classes, you must separate each class with a space. The endpoints tool also automatically generates a Java client library that is ready to be used with Android and Java web apps. To generate a client library for an iOS application, another step is required that uses one of the API discovery files, which is discussed in the next section on `Objective-C and iOS`_.
+
+However, if you try to use the endpoints tool on Scala code, you will get all kinds of Java exceptions about missing classes. These exceptions are due to the fact that the CLASSPATH of the endpoints tool has none of the Scala JARs and thus none of the Scala specific classes are recognized at compile time. Luckily, there is a simple fix to this issue: you simply need to modify the *endpoints.sh* script to include the Scala JARs on the CLASSPATH. This modification can be achieved by adding the following lines to the end of the *endpoints.sh* script, replacing *path_to_scala* with the full path to the Scala directory on your machine:
+
+.. code-block:: sh
+    :linenos:
+
+	SCALA_LIB="/path_to_scala/libexec"
+	for jar in "$SCALA_LIB"/lib/*.jar; do
+		CLASSPATH="$CLASSPATH:$jar"
+	done
+	
+Once you have generated all of the API files, move all files other than the *.zip* into your *war/WEB-INF* directory. You can now test your API backend locally `using curl`_. Another way to test your API that isn't explicitly noted in the Java documentation is by using the APIs Explorer tool. The really nice part about this tool is that it runs right in your browser and essentially provides you with an interface to call your various APIs. You can access this tool on API backends running locally, as well as those that are live, simply by adding the following path to the end of your application's URL: */_ah/api/explorer*. For example, if you are running your API backend locally on port 8888, you would enter the following URL into your browser: *http://localhost:8888/_ah/api/explorer*. You can create and pass in the parameters your APIs require and even authorize requests through OAuth 2.0 using this wonderful tool. 
+
+.. _using curl: https://developers.google.com/appengine/docs/java/endpoints/test_deploy
+
+Generating Client IDs
+~~~~~~~~~~~~~~~~~~~~~
+
+In order for other applications to be able to access your APIs, they need a client ID. You must create and include this ID within both the client application and the API backend. There are two different types of client IDs: simple and authorized. As the names suggest, a simple client ID provides unauthenticated access, while an authorized client ID provides authenticated access. You should use simple client IDs when you don't need to access user data and authorized client IDs whenever you need to access private user data. To create client IDs, you need to have a project in the `Google APIs console`_. If you don't have one, it is very simple and straightforward to create a new one. Once you open this project, click on the "API Access" tab to create and manage client IDs. 
+
+.. _Google APIs console: https://code.google.com/apis/console
+
+.. _Objective-C and iOS:
+
+Objective-C and iOS
+-------------------
+
+This documentation assumes that you are already familiar with using Objective-C to write iOS applications. Apple has `wonderful documentation`_ to help familiarize you with Objective-C and iOS and there is a huge developer community online as well. The TicTacToe client is an iOS application that accesses the APIs provided by the Scala App Engine endpoint using the client library generated by the endpoint tool. This client library relies heavily on the `Google APIs Client Library for Objective-C`_. The Objective-C client library can be used for more than just accessing APIs exposed by a cloud endpoint, such as integrating an iOS application with Google Drive and Google Calendar. However, this documentation is only concerned with accessing cloud endpoints APIs from the iOS client.
+
+.. _wonderful documentation: https://www.developer.apple.com
+.. _Google APIs Client Library for Objective-C: http://code.google.com/p/google-api-objectivec-client/
+
+Linking to the Google APIs Client Library for Objective-C
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For the purpose of the TicTacToe iOS client, the Objective-C client library was solely used because of the dependency from the auto-generated iOS client library discussed in the next section. While there are `a few different ways`_ to use the library within an iOS application, by far the easiest approach is to simply compile the source files directly into your application. To check out a copy of the Objective-C client library, type the following command at the command line: 
+
+.. code-block:: sh
+
+	svn checkout http://google-api-objectivec-client.googlecode.com/svn/trunk/ google-api-objectivec-client-read-only
+
+.. _a few different ways: http://code.google.com/p/google-api-objectivec-client/wiki/BuildingTheLibrary
+
+Once you have run this command, you should have a directory with a name like *google-api-objectivec-client-read-only*, inside of which is two more directories; one with examples showing the different services being used and the other with the source code. All you have to do is drag all of the header and implementation source files that your application will need to make use of into the navigator pane of your iOS application in Xcode. If you take a look at the TicTacToe iOS client, you will see two folders within the "Supporting Files" folder, one for the headers that the application needs and one for the source. However, if your iOS application uses ARC (*it should!*), you need to modify the command line arguments used when the Google client library files are compiled because the client library does not use ARC. To do so, select the target you added the library files to and go to the "Build Phases" tab. From this tab, expand the "Compile Sources" section, select all of the library files and press enter. In the text area that pops up, type "-fno-objc-arc" and press enter once more. Now when you build your application, you should not receive any errors regarding these files. After you have successfully added the library to your application, all you need to do is *#include* the headers in your application code where the classes are used.
+
+Generating the iOS Client Library
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As eluded to earlier, generating the iOS client library from your annotated API backend requires a bit more work than with the Java client library. You still must invoke the endpoints tool on your annotated APIs, but you also need to make use of a Service Generator tool that comes with the Google APIs Objective-C client library. The Service Generator Xcode project is located within the *Source/Tools/ServiceGenerator* directory and you need to use this Xcode project to build the tool itself. Once you open the *ServiceGenerator.xcodeproj* file, just build the project (hotkey *command+b*) and the Service Generator tool will be built and placed in the "Products" folder in the navigator pane of the Xcode project. Click on the *ServiceGenerator* executable in Xcode and, from the utilities view, use the file inspector to locate its full path (likely in the derived data for the project). You then use the tool like so, passing in the *xx-xx-rpc.discovery* file autogenerated by the endpoints tool:
+
+.. code-block:: sh
+
+	/full/path/to/ServiceGenerator apiName-version-rpc.discovery --outputDir API
+
+This command will generate the necessary Objective-C classes that provide basic consumption of the APIs you exposed. If you wish to add custom methods of your own to these classes, you shouldn't write this code directly into the auto-generated files. Instead, you should subclass the auto-generated classes and add the new functionality in the subclass. The main reason behind this idea is that every time you change your API backend and recreate your client libraries, the new auto-generated files won't have the custom code you added, should any of those files change.
+
+	**Note:** You need to explicitly create getter and setter methods for all of the instance variables that you want to be created as properties within the auto-generated code.
+
+Objectify
+---------
+
+Last, but certainly not least, is the Objectify framework. This framework is specifically designed to be used as a wrapper around the Java implementation of the Google App Engine datastore. With Objectify, you can easily configure your entities using annotations and interact with the App Engine datastore using a clean, simple API. You also have access to an Objectify session cache on top of the App Engine memcache and schema changes are made much easier using some tricks with Objectify annotations. All of this and more is explained in the `documentation for Objectify`_ for those who are unfamiliar. The TicTacToe application uses Objectify 4.0b3, which can be found here_. You will also need to download the `Google Guava JAR`_, as this is a dependency of this version of Objectify.
+
+.. _documentation for Objectify: http://code.google.com/p/objectify-appengine/wiki/Introduction
+.. _here: http://repo1.maven.org/maven2/com/googlecode/objectify/objectify/4.0b3/
+.. _Google Guava JAR: http://code.google.com/p/guava-libraries/
+
+Using Objectify with Scala
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+One of the greatest features of Objectify 4 is its ability to work well with Scala. In fact, their integration "just works" excluding a few minor points of interest:
+
+- To autopopulate the id field of a Long id, you need to directly use the java.lang.Long type because Scala's Long doesn't allow initalizing to a *null* value.
+- The *type* keyword is a reserved word in Scala. To use the *type()* method of the Objectify service, you need to surround it with backticks: *`type`()*.
+- The *type()* method expects a class type as input, which is retrieved using the *classOf[]* operator in Scala.
+
+Using Objectify with Google Cloud Endpoints
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A really nice feature of Objectify is the ability to define complex relationships between entities using the Key<?> class and the Ref<?> class. Unfortunately, the endpoints tool will throw an exception if any of the classes used as a parameter or return type in an API contain a Key<?> or Ref<?> member variable. The endpoints tool fails because it cannot properly serialize an instance of either of these two classes when the data is passing between the API backend and client. Although this limitation didn't cause any problems with the TicTacToe application, it is nonetheless a significant limitation. A suggested workaround for this issue would be to separate your entity classes into an internal representation that gets saved into the datastore and an external representation that is only used to pass data between the API backend and the client. The external representation would only need to contain the ID of the internal representation, so that you could retrieve the internal representation in the API backend when a request comes in.
+

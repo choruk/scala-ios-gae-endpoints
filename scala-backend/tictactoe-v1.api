@@ -1,0 +1,260 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://tictactoe-api.appspot.com/_ah/api",
+  "name" : "tictactoe",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://tictactoe-api.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "tictactoe.gamePlay.markGameAsFinished" : {
+      "path" : "markGameAsFinished",
+      "httpMethod" : "POST",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ "192939006046.apps.googleusercontent.com" ],
+      "rosyMethod" : "sample.tictactoe.multiplayer.controllers.GamePlayController.markGameAsFinished",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tictactoe.games.list" : {
+      "path" : "games",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ "192939006046.apps.googleusercontent.com" ],
+      "rosyMethod" : "sample.tictactoe.multiplayer.controllers.GamePlayController.list",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tictactoe.gamePlay.getCurrentGameBoard" : {
+      "path" : "game",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ "192939006046.apps.googleusercontent.com" ],
+      "rosyMethod" : "sample.tictactoe.multiplayer.controllers.GamePlayController.getCurrentGameBoard",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tictactoe.gamePlay.updateGameWithNewBoard" : {
+      "path" : "makeMoveWithBoard",
+      "httpMethod" : "PUT",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ "192939006046.apps.googleusercontent.com" ],
+      "rosyMethod" : "sample.tictactoe.multiplayer.controllers.GamePlayController.makeMoveWithBoard",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tictactoe.scores.list" : {
+      "path" : "score",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ "192939006046.apps.googleusercontent.com" ],
+      "rosyMethod" : "sample.tictactoe.multiplayer.controllers.ScoreController.list",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tictactoe.matchmaking.findOrCreateGame" : {
+      "path" : "findOrCreateGame",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ "192939006046.apps.googleusercontent.com" ],
+      "rosyMethod" : "sample.tictactoe.multiplayer.controllers.MatchmakingController.findOrCreateGame",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Game" : {
+        "id" : "Game",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "user1" : {
+            "$ref" : "User"
+          },
+          "user2" : {
+            "$ref" : "User"
+          },
+          "date" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "playerTurn" : {
+            "type" : "integer"
+          },
+          "board" : {
+            "type" : "string"
+          }
+        }
+      },
+      "User" : {
+        "id" : "User",
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "authDomain" : {
+            "type" : "string"
+          },
+          "userId" : {
+            "type" : "string"
+          },
+          "federatedIdentity" : {
+            "type" : "string"
+          },
+          "nickname" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Score" : {
+        "id" : "Score",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "user1" : {
+            "$ref" : "User"
+          },
+          "user2" : {
+            "$ref" : "User"
+          },
+          "date" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "playerTurn" : {
+            "type" : "integer"
+          },
+          "board" : {
+            "type" : "string"
+          },
+          "outcome" : {
+            "type" : "string"
+          }
+        }
+      },
+      "GameCollection" : {
+        "id" : "GameCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Game"
+            }
+          }
+        }
+      },
+      "ScoreCollection" : {
+        "id" : "ScoreCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Score"
+            }
+          }
+        }
+      }
+    },
+    "methods" : {
+      "sample.tictactoe.multiplayer.controllers.GamePlayController.markGameAsFinished" : {
+        "request" : {
+          "$ref" : "Game"
+        },
+        "response" : {
+          "$ref" : "Score"
+        }
+      },
+      "sample.tictactoe.multiplayer.controllers.GamePlayController.list" : {
+        "response" : {
+          "$ref" : "GameCollection"
+        }
+      },
+      "sample.tictactoe.multiplayer.controllers.GamePlayController.getCurrentGameBoard" : {
+        "request" : {
+          "$ref" : "Game"
+        },
+        "response" : {
+          "$ref" : "Game"
+        }
+      },
+      "sample.tictactoe.multiplayer.controllers.GamePlayController.makeMoveWithBoard" : {
+        "request" : {
+          "$ref" : "Game"
+        },
+        "response" : {
+          "$ref" : "Game"
+        }
+      },
+      "sample.tictactoe.multiplayer.controllers.ScoreController.list" : {
+        "response" : {
+          "$ref" : "ScoreCollection"
+        }
+      },
+      "sample.tictactoe.multiplayer.controllers.MatchmakingController.findOrCreateGame" : {
+        "response" : {
+          "$ref" : "Game"
+        }
+      }
+    }
+  }
+}

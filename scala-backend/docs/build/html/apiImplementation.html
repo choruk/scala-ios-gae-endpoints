@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Backend API Implementation &mdash; TicTacToe 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="TicTacToe 1 documentation" href="index.html" />
+    <link rel="next" title="The iOS Client" href="iOSClient.html" />
+    <link rel="prev" title="Modeling The Entities" href="objectifyEntities.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="iOSClient.html" title="The iOS Client"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="objectifyEntities.html" title="Modeling The Entities"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">TicTacToe 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-backend-api-implementation">
+<h1>The Backend API Implementation<a class="headerlink" href="#the-backend-api-implementation" title="Permalink to this headline">¶</a></h1>
+<p>TALK ABOUT: INABILITY TO QUERY BY ONE PROPERTY AND SORT BY OTHER UNLESS EQUALITY QUERY, INABILITY TO RETURN SCALA TYPES (due to serialization), INABILITY TO GET ALL GAMES WITH A SINGLE QUERY</p>
+<p>The development process, as discussed in the Google Cloud Endpoints section of the Techonologies page, for an App Engine API backend is very straightforward. The TicTacToe application splits the API between three different controllers to manage the three unique aspects of the application: a <em>MatchmakingController</em> for the matchmaking system to find a game, a <em>GamePlayController</em> for managing game play and a <em>ScoreController</em> for displaying completed games. The APIs that these controllers implement all require authentication, evidenced by the <em>checkForUser()</em> method called at the start of each API.</p>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>Certain limitations were introduced into the API backend due to App Engine restrictions and conflicting technologies. To allow App Engine to efficiently load values from the datastore, only queries with a certain structure are allowed to be executed. Google <a class="reference external" href="https://developers.google.com/appengine/docs/java/datastore/queries#Restrictions_on_Queries">explicitly documents</a> the restrictions on datastore queries and these restrictions introduced a few limitations within the TicTacToe application. Within the <em>findOrCreateGame()</em> method of the <em>MatchmakingController</em> class, the first limitation is introduced with the following line:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">val</span> <span class="n">pendingGames</span><span class="k">:</span><span class="kt">MBuff</span><span class="o">[</span><span class="kt">PendingGame</span><span class="o">]</span> <span class="k">=</span> <span class="n">ofy</span><span class="o">().</span><span class="n">load</span><span class="o">().</span><span class="n">`type`</span><span class="o">(</span><span class="n">classOf</span><span class="o">[</span><span class="kt">PendingGame</span><span class="o">]).</span><span class="n">order</span><span class="o">(</span><span class="s">&quot;date&quot;</span><span class="o">).</span><span class="n">list</span><span class="o">().</span><span class="n">asInstanceOf</span><span class="o">[</span><span class="kt">JList</span><span class="o">[</span><span class="kt">PendingGame</span><span class="o">]].</span><span class="n">asScala</span><span class="o">.</span><span class="n">filter</span><span class="o">{</span> <span class="n">pg</span><span class="k">:</span><span class="kt">PendingGame</span> <span class="o">=&gt;</span> <span class="n">pg</span><span class="o">.</span><span class="n">getUser1</span><span class="o">().</span><span class="n">getEmail</span><span class="o">()</span> <span class="o">!=</span> <span class="n">user</span><span class="o">.</span><span class="n">getEmail</span><span class="o">()</span> <span class="o">}</span>
+</pre></div>
+</div>
+<p>This code line is retrieving a list of all <em>PendingGame</em> objects that were not created by this user, i.e. all pending games that this user can join. This list is ordered by the <em>date</em> property of each <em>PendingGame</em> object such that the oldest pending game is first in the list. In this way, the player who has been waiting for a second competitor the longest will be the one whose game the new player joins. However, one of the query restrictions is that properties used in inequality filters (i.e. any filter besides <em>==</em>) must be sorted first. This restriction would mean that we would have to order first by <em>user1</em> and then by <em>date</em> and players with emails that start with the character a would get the greatest priority. Luckily, it is safe to assume that this player won&#8217;t have many <em>PendingGame</em> objects in the datastore and thus not much of an extra hit is taken simply by letting the datastore order by <em>date</em> and then filtering the result.</p>
+<p>The other hoop to jump around is due to the inability of the endpoints tool to serialize Scala classes. This inability causes the endpoints tool to throw an exception when it runs into a method whose return type involves a class specific to Scala. Luckily, the fix for this issue is simple: the <em>scala.collection.JavaConverters</em> package provides a simple way to convert back and forth between certain Scala and Java classes. Using this package, you can simply use <em>asScala</em> or <em>asJava</em> to accurately convert between certain supported types.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Backend API Implementation</a><ul>
+<li><a class="reference internal" href="#limitations">Limitations</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="objectifyEntities.html"
+                        title="previous chapter">Modeling The Entities</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="iOSClient.html"
+                        title="next chapter">The iOS Client</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/apiImplementation.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="iOSClient.html" title="The iOS Client"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="objectifyEntities.html" title="Modeling The Entities"
+             >previous</a> |</li>
+        <li><a href="index.html">TicTacToe 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Chris Horuk.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>
