@@ -6,18 +6,6 @@ import com.googlecode.objectify.condition.IfNotNull
 import java.util.Date
 import java.lang.{ Long => JLong }
 
-/*import com.googlecode.objectify.annotation
-import scala.annotation.target.field
-
-object Annotations {
-
-  type Id = annotation.Id @field
-  type Parent = annotation.Parent @field
-  type Load = annotation.Load @field
-  type Embed = annotation.Embed @field
-
-}*/
-
 @Entity
 sealed class Game
 {	

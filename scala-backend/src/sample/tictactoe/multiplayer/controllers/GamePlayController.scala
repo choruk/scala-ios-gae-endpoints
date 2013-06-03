@@ -1,6 +1,6 @@
 package sample.tictactoe.multiplayer.controllers
 
-import sample.tictactoe.multiplayer.entities._//{ Game, PendingGame, CurrentGame, Score }
+import sample.tictactoe.multiplayer.entities._
 import com.google.api.server.spi.config.{ Api, ApiMethod }
 import com.google.api.server.spi.config.ApiMethod.HttpMethod
 import com.google.appengine.api.users.{ User }
@@ -48,15 +48,6 @@ class GamePlayController
 	{
 		checkForUser(user)
 		ofy().load.`type`(classOf[Game]).id(inputGame.getID()).now()
-		/*
-		val currentGame = ofy().load.`type`(classOf[Game]).id(inputGame.getID()).now()
-		val currentGameAsScore = if (currentGame == null) ofy().load.`type`(classOf[Score]).id(inputGame.getID()).now() *//*filter("user1", currentGame.getUser1()).filter("user2", currentGame.getUser2()).
-																										 order("-date").list().asInstanceOf[java.util.List[PendingGame]].asScala.head*/
-		/*												 else null
-		if (currentGameAsScore == null)
-			currentGame
-		else
-			currentGameAsScore*/
 	}
 	
 	@ApiMethod(
@@ -66,9 +57,7 @@ class GamePlayController
 	def makeMoveWithBoard(user:User, updatedGame:Game) : Game =
 	{
 		checkForUser(user)
-		// Needed to ensure the type of the game we are updating is maintained within the DB
-		val typeSpecificUpdatedGame = ofy().load.`type`(classOf[Game]).id(updatedGame.getID()).now()/*if (updatedGame.getUser2() == null) ofy().load.`type`(classOf[PendingGame]).id(updatedGame.getID()).now()
-																	else ofy().load.`type`(classOf[CurrentGame]).id(updatedGame.getID()).now()*/
+		val typeSpecificUpdatedGame = ofy().load.`type`(classOf[Game]).id(updatedGame.getID()).now()
 		// Since this represents someones turn, update the playerTurn property as well
 		val updatedTurn = if (typeSpecificUpdatedGame.getPlayerTurn() == 1) 2 else 1
 		typeSpecificUpdatedGame.setPlayerTurn(updatedTurn)
@@ -99,8 +88,3 @@ class GamePlayController
 		gameScore
 	}
 }
-
-/*object GameController
-{
-	val DEBUG=true
-}*/

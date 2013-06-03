@@ -1,6 +1,6 @@
 package sample.tictactoe.multiplayer.startup
 
-import sample.tictactoe.multiplayer.entities._//{ Game, PendingGame, CurrentGame, Score }
+import sample.tictactoe.multiplayer.entities._
 import javax.servlet.{ ServletContext, ServletContextEvent, ServletContextListener }
 import com.googlecode.objectify.ObjectifyService
 import java.util.logging.{ Logger, Level }

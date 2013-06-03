@@ -10,6 +10,7 @@ import scala.collection.mutable.{ Buffer => MBuff }
 import scala.collection.JavaConverters._
 import java.util.{ List=>JList }
 import java.util.logging.{ Logger, Level }
+import com.googlecode.objectify.Ref
 
 @Api(
 	name = "tictactoe",
@@ -17,10 +18,7 @@ import java.util.logging.{ Logger, Level }
 	clientIds = Array("192939006046.apps.googleusercontent.com")
 )
 class ScoreController
-{
-	/*val log = Logger.getLogger(classOf[ScoreController].getName())
-	log.setLevel(Level.INFO)*/
-	
+{	
 	private def checkForUser(user:User) = if (user == null) throw new OAuthRequestException("Invalid user.")
 
 	@ApiMethod(
@@ -34,6 +32,5 @@ class ScoreController
 		val scoreListTwo = ofy().load().`type`(classOf[Score]).filter("user2", user).list().asInstanceOf[JList[Score]].asScala
 		
 		(scoreListOne ++ scoreListTwo).asJava
-	}
-	
+	}	
 }

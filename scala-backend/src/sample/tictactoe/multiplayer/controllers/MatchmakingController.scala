@@ -29,11 +29,10 @@ class MatchmakingController
 	)
 	def findOrCreateGame(user:User) : Game =
 	{
-		//log.setLevel(Level.INFO)
 		checkForUser(user)
 		val pendingGames:MBuff[PendingGame] = ofy().load().`type`(classOf[PendingGame]).order("date").list().
 																						asInstanceOf[JList[PendingGame]].asScala.filter{ pg:PendingGame => pg.getUser1().getEmail() != user.getEmail() }
-		//pendingGames.foreach{ pg:PendingGame => log.info("One of the pending games has a user of " + pg.getUser1())}
+																						
 		if (pendingGames.isEmpty)
 		{
 			//create a new PendingGame and return it to the user

@@ -2,8 +2,6 @@
 The Backend API Implementation
 ==============================
 
-TALK ABOUT: INABILITY TO QUERY BY ONE PROPERTY AND SORT BY OTHER UNLESS EQUALITY QUERY, INABILITY TO RETURN SCALA TYPES (due to serialization), INABILITY TO GET ALL GAMES WITH A SINGLE QUERY
-
 The development process, as discussed in the Google Cloud Endpoints section of the Techonologies page, for an App Engine API backend is very straightforward. The TicTacToe application splits the API between three different controllers to manage the three unique aspects of the application: a *MatchmakingController* for the matchmaking system to find a game, a *GamePlayController* for managing game play and a *ScoreController* for displaying completed games. The APIs that these controllers implement all require authentication, evidenced by the *checkForUser()* method called at the start of each API.
 
 Limitations
